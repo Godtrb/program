@@ -27,3 +27,5 @@ class Inventario:
             print("producto agregado.\n")
         except ValueError:
             print("Error: El precio del producto debe ser un numero entero.\n")
+
+def modif(
