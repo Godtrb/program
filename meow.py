@@ -23,7 +23,7 @@ class Inventario:
                 return
             categoria = input("Ingresar categoria del producto: ")
             stock= int(input("Ingresar numero del producto en existencia: "))
-            self.Productos[codigo] = Productos(nombre,categoria,precio,codigo,stuck=True)
+            self.Productos[codigo] = Productos(nombre,categoria,precio,codigo,stock)
             print("producto agregado.\n")
         except ValueError:
             print("Error: El precio del producto debe ser un numero entero.\n")
