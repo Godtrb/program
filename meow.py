@@ -23,6 +23,9 @@ class Inventario:
                 return
             categoria = input("Ingresar categoria del producto: ")
             stock= int(input("Ingresar numero del producto en existencia: "))
+            if stock <=0:
+                print("Error: No es posible tener un stock negativo.")
+                return
             self.Productos[codigo] = Productos(nombre,categoria,precio,codigo,stock)
             print("producto agregado.\n")
         except ValueError:
