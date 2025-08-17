@@ -17,12 +17,13 @@ class Inventario:
                 return
 
             nombre = input("Ingresar nombre del producto: ")
-            precio = float(input("Ingresar año de publicacion del libro: "))
+            precio = float(input("Ingresar precio del producto: "))
             if(precio <= 0):
-                print("Error: No es poscible tener un precio negativo.")
+                print("Error: No es posible tener un precio negativo.")
                 return
-            categoria = input("Ingresar autor del libro: ")
+            categoria = input("Ingresar categoria del producto: ")
+            stock= int(input("Ingresar numero del producto en existencia: "))
             self.Productos[codigo] = Productos(nombre,categoria,precio,codigo,stuck=True)
-            print("Libro agregado.\n")
+            print("producto agregado.\n")
         except ValueError:
-            print("Error: El año de publicacion debe ser un numero entero.\n")
+            print("Error: El precio del producto debe ser un numero entero.\n")
