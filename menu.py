@@ -102,7 +102,5 @@ while True:
         case 4:
             pass
         case 5:
-            pass
-        case 6:
             print("Adiós, vuelva pronto.")
             break
