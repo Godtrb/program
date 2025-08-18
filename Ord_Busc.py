@@ -7,7 +7,7 @@ class Producto:
         self.stock = stock
 
     def __str__(self):
-        return f"[{self.codigo}] {self.nombre} | {self.categoria} | Precio: {self.precio} | Stock: {self.stock}"
+        return f"Código: {self.codigo} Producto: {self.nombre} Categoría: {self.categoria}  Precio: {self.precio}  Stock: {self.stock}"
 
 
 class Inventario:
@@ -158,7 +158,7 @@ class Listado():
                 self.menu_Salida()
                 return
             productos_lista = list(self.Productos.values())
-            print("\n--- LISTADO  ---")
+            print("\n--- LISTADO DE PRODUCTOS  ---")
             for producto in productos_lista:
                 print(producto)
             while True:
@@ -190,9 +190,9 @@ class Listado():
                 elif opcion == 4:
                     return
                 else:
-                    print("Opción inválida. Mostrando sin ordenar.\n")
+                    print("Opción inválida... ")
 
-                print("\n--- LISTADO  ---")
+                print("--- LISTADO DE PRODUCTOS  ---")
                 for producto in productos_lista:
                     print(producto)
                 self.menu_Salida()
@@ -269,8 +269,10 @@ while True:
         case 3:
             busqueda.buscar_codigo()
         case 4:
+          # Inventario.modif(sampletext)
             pass
         case 5:
+          #  Inventario.eliminate(sampletext)
             pass
         case 6:
             print("Adiós, vuelva pronto.")
