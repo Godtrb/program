@@ -84,3 +84,5 @@ class Inventario:
                 else:
                     print("Opción inválida. Responda 'si' o 'no'.\n")
 
+
+inventario = Inventario()
