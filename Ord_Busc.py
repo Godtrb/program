@@ -141,77 +141,65 @@ class Listado():
         return self.quick_sort(menores, buscar) + iguales + self.quick_sort(mayores, buscar)
 
 
-    def mostrar(self):
-        if not self.Productos:
-            print("Aún no hay productos en el inventario.\n")
-            self.menu_Salida()
-            return
-
-        print("---- LISTADO DE PRODUCTOS --")
-        for producto in self.Productos.values():
-            print(producto)
-     #   self.menu_Salida()
-
-        def ordenamiento(self):
-            if no
-
+    def menu_Salida(self):
         while True:
-            ver_original = input("¿Desea ver el listado original de productos? (si/no): ").strip().lower()
-            productos_lista = list(self.Productos.values())
-
-            if ver_original == "si":
-                print("\n--- LISTADO ORIGINAL ---")
-                for producto in productos_lista:
-                    print(producto)
-            elif ver_original != "no":
-                print("Opción inválida. Responda 'si' o 'no'.\n")
-                continue
-
-            ordenar = input("\n¿Desea ordenar los productos? (si/no): ").strip().lower()
-            if ordenar == "no":
-                print("Regresando al menú principal...\n")
+            opcion = input("\n¿Desea regresar al menú principal o salir? (menu/salir): ").strip().lower()
+            if opcion == "menu":
                 return
-            elif ordenar != "si":
-                print("Opción inválida. Responda 'si' o 'no'.\n")
-                continue
-
-            print("\nOrdenar por:")
-            print("1) Nombre")
-            print("2) Precio")
-            print("3) Stock")
-            try:
-                opcion = int(input("Seleccione una opción: "))
-            except ValueError:
-                print(" Debe ingresar un número válido.\n")
-                continue
-
-            def por_nombre(prod):
-                return prod.nombre.lower()
-
-            def por_precio(prod):
-                return prod.precio
-
-            def por_stock(prod):
-                return prod.stock
-
-            if opcion == 1:
-                productos_lista = self.quick_sort(productos_lista, buscar=por_nombre)
-            elif opcion == 2:
-                productos_lista = self.quick_sort(productos_lista, buscar=por_precio)
-            elif opcion == 3:
-                productos_lista = self.quick_sort(productos_lista, buscar=por_stock)
+            elif opcion == "salir":
+                print("Adiós, vuelva pronto.")
+                exit()
             else:
-                print("Opción inválida. Mostrando sin ordenar.\n")
+                 print("Opción inválida. Responda 'menu' o 'salir'.")
 
-            print("\n--- LISTADO ORDENADO ---")
+    def ordenamiento(self):
+            if not  self.Productos:
+                print("Aún no hay productos en el inventario.")
+                self.menu_Salida()
+                return
+            productos_lista = list(self.Productos.values())
+            print("\n--- LISTADO  ---")
             for producto in productos_lista:
                 print(producto)
+            while True:
+                print("\nOrdenar por:")
+                print("1) Nombre")
+                print("2) Precio")
+                print("3) Stock")
+                try:
+                    opcion = int(input("Seleccione una opción: "))
+                except ValueError:
+                    print(" Debe ingresar un número válido.\n")
+                    continue
 
-            continuar = input("\n¿Desea ordenar nuevamente? (si/no): ").strip().lower()
-            if continuar == "no":
-                print("Regresando al menú principal...\n")
+                def por_nombre(prod):
+                    return prod.nombre.lower()
+
+                def por_precio(prod):
+                    return prod.precio
+
+                def por_stock(prod):
+                    return prod.stock
+
+                if opcion == 1:
+                    productos_lista = self.quick_sort(productos_lista, buscar=por_nombre)
+                elif opcion == 2:
+                    productos_lista = self.quick_sort(productos_lista, buscar=por_precio)
+                elif opcion == 3:
+                    productos_lista = self.quick_sort(productos_lista, buscar=por_stock)
+                elif opcion == 4:
+                    return
+                else:
+                    print("Opción inválida. Mostrando sin ordenar.\n")
+
+                print("\n--- LISTADO  ---")
+                for producto in productos_lista:
+                    print(producto)
+                self.menu_Salida()
                 return
-class Buscar():
+
+
+#class Buscar():
 
 
 inventario = Inventario()
@@ -240,7 +228,7 @@ while True:
         case 1:
             inventario.agregar()
         case 2:
-            listado.mostrar()
+            listado.ordenamiento()
         case 3:
             pass
         case 4:
