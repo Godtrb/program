@@ -70,6 +70,6 @@ class Inventario:
 
         except ValueError:
             print("Error: Ingrese un valor válido.")
-    def modif(self, codigo):
+    def eliminate(self, codigo):
         self.Productos[codigo].pop()
         print("Producto eliminado correctamente.")
