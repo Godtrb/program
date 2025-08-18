@@ -269,10 +269,12 @@ while True:
         case 3:
             busqueda.buscar_codigo()
         case 4:
-          # Inventario.modif(sampletext)
+            codtochange=busqueda.buscar_codigo()
+            Inventario.modif(codtochange)
             pass
         case 5:
-          #  Inventario.eliminate(sampletext)
+            codtochange = busqueda.buscar_codigo()
+            Inventario.eliminate(codtochange)
             pass
         case 6:
             print("Adiós, vuelva pronto.")
