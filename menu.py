@@ -218,7 +218,7 @@ class Buscar():
     def buscar_codigo(self):
             if not self.Productos:
                 print("Aún no hay productos en el inventario")
-                self.menu.Salida()
+                self.menu_Salida()
                 return
             try:
                 codigo_buscar = int(input("Ingrese el código del producto: "))
