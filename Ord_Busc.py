@@ -199,7 +199,7 @@ class Listado():
                 return
 
 
-#class Buscar():
+class Buscar():
 
 
 inventario = Inventario()
