@@ -10,12 +10,10 @@
 
 **TABLA DE CONTENIDOS**
 
-[TOCM]
 
-[TOC]
 #Godtrb
 
-####Código
+###Código
 **Ingreso de datos y sus validaciones**
 Se puede observar que el código no se puede repetir y acepta únicamente números enteros positivos
 ```html
@@ -53,7 +51,7 @@ El método pop() elimina el elemento con la clave especificada y devuelve su úl
 
 #Jalegosa
 
-####Código
+###Código
 ** Ordenamiento Quick Sort**
 Este ordenamiento recursivo nos permite realizar el ordenamiento en base a la solicitud del usuario, en este caso  la función buscar nos sirve para comparar elementos y determinar su posición relativa con respecto al pivote
 ```html
