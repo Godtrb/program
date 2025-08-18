@@ -70,9 +70,10 @@ class Inventario:
 
         except ValueError:
             print("Error: Ingrese un valor válido.")
-    def modif(self, codigo):
+    def eliminate(self, codigo):
         self.Productos[codigo].pop()
         print("Producto eliminado correctamente.")
+        
 Inventario = Inventario()
 while True:
     print("- BIENVENIDO A SMARTSTOCK - ")
@@ -103,7 +104,7 @@ while True:
         case 4:
             Inventario.modif(sampletext)
         case 5:
-            Inventario.elim(sampletext)
+            Inventario.eliminate(sampletext)
         case 6:
             print("Adiós, vuelva pronto.")
             break
