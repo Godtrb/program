@@ -73,15 +73,16 @@ class Inventario:
     def modif(self, codigo):
         self.Productos[codigo].pop()
         print("Producto eliminado correctamente.")
-
+Inventario = Inventario()
 while True:
     print("- BIENVENIDO A SMARTSTOCK - ")
     print("----- M E N Ú ----- ")
     print("1. Registro de Producto")
     print("2. Listado de Productos ")
     print("3. Búsqueda de Producto ")
-    print("4. Actualizar/Eliminar Producto ")
-    print("5. Salir")
+    print("4. Actualizar Producto ")
+    print("5. Eliminar Producto ")
+    print("6. Salir")
     while True:
         try:
             opcion = int(input("Seleccione una opción:  "))
@@ -94,13 +95,15 @@ while True:
 
     match opcion:
         case 1:
-            pass
+            Inventario.agregar()
         case 2:
             pass
         case 3:
             pass
         case 4:
-            pass
+            Inventario.modif(sampletext)
         case 5:
+            Inventario.elim(sampletext)
+        case 6:
             print("Adiós, vuelva pronto.")
             break
