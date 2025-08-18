@@ -5,6 +5,7 @@
 - Implementa Quick Sort para listas de productos.
 - Implementa búsqueda secuencial.
 
+  ![DivideVenceras](https://github.com/Godtrb/program/blob/master/images.jpeg)
 
 
 **TABLA DE CONTENIDOS**
