@@ -1,75 +1,88 @@
-class Productos:
-    def __init__(self, nombre, categoria, precio,codigo,stock):
+class Producto:
+    def __init__(self, codigo, nombre, categoria, precio, stock):
         self.codigo = codigo
-        self.nombre = nombre
-        self.categoria= categoria
-        self.precio= precio
+        self.nombre = nombre.strip()
+        self.categoria = categoria.strip()
+        self.precio = float(precio)
         self.stock = stock
+
+    def __str__(self):
+        return f"[{self.codigo}] {self.nombre} | {self.categoria} | Precio: {self.precio} | Stock: {self.stock}"
+
+
 class Inventario:
     def __init__(self):
         self.Productos = {}
 
     def agregar(self):
-        try:
-            codigo = input("Ingresar codigo del producto: ")
-            if codigo in self.Productos:
-                print("Ya existe un producto bajo este codigo.\n")
-                return
+        while True:
+            while True:
+                try:
+                    codigo = int(input("Ingrese código del producto: "))
+                    if codigo <= 0:
+                        print("El código debe ser un número entero positivo.\n")
+                        continue
+                    if codigo in self.Productos:
+                        print("El código ya existe en el inventario.\n")
+                        continue
+                    break
+                except ValueError:
+                    print("Debe ingresar un número entero.\n")
 
-            nombre = input("Ingresar nombre del producto: ")
-            precio = float(input("Ingresar precio del producto: "))
-            if(precio <= 0):
-                print("Error: No es posible tener un precio negativo.")
-                return
-            categoria = input("Ingresar categoria del producto: ")
-            stock= int(input("Ingresar numero del producto en existencia: "))
-            if stock <=0:
-                print("Error: No es posible tener un stock negativo.")
-                return
-            self.Productos[codigo] = Productos(nombre,categoria,precio,codigo,stock)
-            print("producto agregado.\n")
-        except ValueError:
-            print("Error: El precio del producto debe ser un numero.\n")
-
-    def modif(self, codigo):
-        try:
-                print("¿Qué desea modificar?")
-                print("1) Nombre")
-                print("2) Categoría")
-                print("3) Precio")
-                print("4) Stock")
-                print("5) Regresar")
-
-                menpick = int(input("Ingresar opción: "))
-
-                if menpick == 1:
-                    name = input("Ingrese el nuevo nombre: ")
-                    self.Productos[codigo].nombre = name
-                    print("Nombre actualizado correctamente.")
-
-                elif menpick == 2:
-                    categ = input("Ingrese la nueva categoría: ")
-                    self.Productos[codigo].categoria = categ
-                    print("Categoría actualizada correctamente.")
-
-                elif menpick == 3:
-                    precio = float(input("Ingrese el nuevo precio: "))
-                    self.Productos[codigo].precio = precio
-                    print("Precio actualizado correctamente.")
-
-                elif menpick == 4:
-                    stock = int(input("Ingrese el nuevo stock: "))
-                    self.Productos[codigo].stock = stock
-                    print("Stock actualizado correctamente.")
-
-                elif menpick == 5:
-                    print("Regresando al menú principal...")
-
+            while True:
+                nombre = input("Ingrese nombre: ").strip()
+                if nombre == "":
+                    print("Error: El nombre no puede quedar vacío.\n")
                 else:
-                    print("Opción no válida, intente nuevamente.")
+                    try:
+                        int(nombre)
+                        print("Error: El nombre no puede ser un número.\n")
+                    except ValueError:
+                        break
 
-        except ValueError:
-            print("Error: Ingrese un valor válido.")
-    def modif(self, codigo):
-        self.Productos[codigo].pop()
-        print("Producto eliminado correctamente.")
+            while True:
+                categoria = input("Ingrese categoría: ").strip()
+                if categoria == "":
+                    print("Error: La categoría no puede quedar vacía.\n")
+                else:
+                    try:
+                        int(categoria)
+                        print("Error: La categoría no puede ser un número.\n")
+                    except ValueError:
+                        break
+
+            while True:
+                try:
+                    precio = float(input("Ingrese precio: "))
+                    if precio <= 0:
+                        print("Error: El precio debe ser un número positivo.\n")
+                        continue
+                    break
+                except ValueError:
+                    print("Error: Debe ingresar un número válido para el precio.\n")
+
+            while True:
+                try:
+                    stock = int(input("Ingrese stock: "))
+                    if stock < 0:
+                        print("Error: El stock debe ser un número entero no negativo.\n")
+                        continue
+                    break
+                except ValueError:
+                    print("Error: Debe ingresar un número entero para el stock.\n")
+
+            producto = Producto(codigo, nombre, categoria, precio, stock)
+            self.Productos[codigo] = producto
+            print("Producto agregado correctamente.\n")
+
+            while True:
+                respuesta = input("¿Desea agregar otro producto? (si/no): ").strip().lower()
+                if respuesta == "si":
+                    break
+                elif respuesta == "no":
+                    return
+                else:
+                    print("Opción inválida. Responda 'si' o 'no'.\n")
+
+
+inventario = Inventario()
