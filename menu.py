@@ -1,35 +1,88 @@
-class Productos:
-    def __init__(self, nombre, categoria, precio,codigo,stock):
+class Producto:
+    def __init__(self, codigo, nombre, categoria, precio, stock):
         self.codigo = codigo
-        self.nombre = nombre
-        self.categoria= categoria
-        self.precio= precio
+        self.nombre = nombre.strip()
+        self.categoria = categoria.strip()
+        self.precio = float(precio)
         self.stock = stock
+
+    def __str__(self):
+        return f"Código: {self.codigo} Producto: {self.nombre} Categoría: {self.categoria}  Precio: {self.precio}  Stock: {self.stock}"
+
+
 class Inventario:
     def __init__(self):
         self.Productos = {}
 
     def agregar(self):
-        try:
-            codigo = input("Ingresar codigo del producto: ")
-            if codigo in self.Productos:
-                print("Ya existe un producto bajo este codigo.\n")
-                return
+        while True:
+            while True:
+                try:
+                    codigo = int(input("Ingrese código del producto: "))
+                    if codigo <= 0:
+                        print("El código debe ser un número entero positivo.\n")
+                        continue
+                    if codigo in self.Productos:
+                        print("El código ya existe en el inventario.\n")
+                        continue
+                    break
+                except ValueError:
+                    print("Debe ingresar un número entero.\n")
 
-            nombre = input("Ingresar nombre del producto: ")
-            precio = float(input("Ingresar precio del producto: "))
-            if(precio <= 0):
-                print("Error: No es posible tener un precio negativo.")
-                return
-            categoria = input("Ingresar categoria del producto: ")
-            stock= int(input("Ingresar numero del producto en existencia: "))
-            if stock <=0:
-                print("Error: No es posible tener un stock negativo.")
-                return
-            self.Productos[codigo] = Productos(nombre,categoria,precio,codigo,stock)
-            print("producto agregado.\n")
-        except ValueError:
-            print("Error: El precio del producto debe ser un numero.\n")
+            while True:
+                nombre = input("Ingrese nombre: ").strip()
+                if nombre == "":
+                    print("Error: El nombre no puede quedar vacío.\n")
+                else:
+                    try:
+                        int(nombre)
+                        print("Error: El nombre no puede ser un número.\n")
+                    except ValueError:
+                        break
+
+            while True:
+                categoria = input("Ingrese categoría: ").strip()
+                if categoria == "":
+                    print("Error: La categoría no puede quedar vacía.\n")
+                else:
+                    try:
+                        int(categoria)
+                        print("Error: La categoría no puede ser un número.\n")
+                    except ValueError:
+                        break
+
+            while True:
+                try:
+                    precio = float(input("Ingrese precio: "))
+                    if precio <= 0:
+                        print("El precio debe ser un número positivo.\n")
+                        continue
+                    break
+                except ValueError:
+                    print("Error: Debe ingresar un número válido para el precio.\n")
+
+            while True:
+                try:
+                    stock = int(input("Ingrese stock: "))
+                    if stock < 0:
+                        print("Error: El stock debe ser un número entero no negativo.\n")
+                        continue
+                    break
+                except ValueError:
+                    print("Error: Debe ingresar un número entero para el stock.\n")
+
+            producto = Producto(codigo, nombre, categoria, precio, stock)
+            self.Productos[codigo] = producto
+            print("Producto agregado correctamente.\n")
+
+            while True:
+                respuesta = input("¿Desea agregar otro producto? (si/no): ").strip().lower()
+                if respuesta == "si":
+                    break
+                elif respuesta == "no":
+                    return
+                else:
+                    print("Opción inválida. Responda 'si' o 'no'.\n")
 
     def modif(self, codigo):
         try:
@@ -70,25 +123,139 @@ class Inventario:
 
         except ValueError:
             print("Error: Ingrese un valor válido.")
-    def eliminate(self, codigo):
+    def modif(self, codigo):
         self.Productos[codigo].pop()
         print("Producto eliminado correctamente.")
-        
-Inventario = Inventario()
+
+class Listado():
+    def __init__(self, inventario):
+        self.Productos = inventario.Productos
+
+    def quick_sort(self, lista, buscar):
+        if len(lista) <= 1:
+            return lista
+        pivote = lista[0]
+        menores = [x for x in lista[1:] if buscar(x) < buscar(pivote)]
+        iguales = [x for x in lista if buscar(x) == buscar(pivote)]
+        mayores = [x for x in lista[1:] if buscar(x) > buscar(pivote)]
+        return self.quick_sort(menores, buscar) + iguales + self.quick_sort(mayores, buscar)
+
+
+    def menu_Salida(self):
+        while True:
+            opcion = input("\n¿Desea regresar al menú principal o salir? (menu/salir): ").strip().lower()
+            if opcion == "menu":
+                return
+            elif opcion == "salir":
+                print("Adiós, vuelva pronto.")
+                exit()
+            else:
+                 print("Opción inválida. Responda 'menu' o 'salir'.")
+
+    def ordenamiento(self):
+            if not  self.Productos:
+                print("Aún no hay productos en el inventario.")
+                self.menu_Salida()
+                return
+            productos_lista = list(self.Productos.values())
+            print("\n--- LISTADO DE PRODUCTOS  ---")
+            for producto in productos_lista:
+                print(producto)
+            while True:
+                print("\nOrdenar por:")
+                print("1) Nombre")
+                print("2) Precio")
+                print("3) Stock")
+                try:
+                    opcion = int(input("Seleccione una opción: "))
+                except ValueError:
+                    print(" Debe ingresar un número válido.\n")
+                    continue
+
+                def por_nombre(prod):
+                    return prod.nombre.lower()
+
+                def por_precio(prod):
+                    return prod.precio
+
+                def por_stock(prod):
+                    return prod.stock
+
+                if opcion == 1:
+                    productos_lista = self.quick_sort(productos_lista, buscar=por_nombre)
+                elif opcion == 2:
+                    productos_lista = self.quick_sort(productos_lista, buscar=por_precio)
+                elif opcion == 3:
+                    productos_lista = self.quick_sort(productos_lista, buscar=por_stock)
+                elif opcion == 4:
+                    return
+                else:
+                    print("Opción inválida... \n")
+
+                print("--- LISTADO DE PRODUCTOS  ---")
+                for producto in productos_lista:
+                    print(producto)
+                self.menu_Salida()
+                return
+
+
+class Buscar():
+    def __init__(self, inventario):
+        self.Productos = inventario.Productos
+
+    def menu_Salida(self):
+        while True:
+            opcion = input("\n¿Desea regresar al menú principal o salir? (menu/salir): ").strip().lower()
+            if opcion == "menu":
+                return
+            elif opcion == "salir":
+                print("Adiós, vuelva pronto.")
+                exit()
+            else:
+                 print("Opción inválida. Responda 'menu' o 'salir'.")
+
+
+    def buscar_codigo(self):
+            if not self.Productos:
+                print("Aún no hay productos en el inventario")
+                self.menu.Salida()
+                return
+            try:
+                codigo_buscar = int(input("Ingrese el código del producto: "))
+            except ValueError:
+                print("Debe ingresar un número válido")
+                return
+            for producto in self.Productos.values():
+                if producto.codigo == codigo_buscar:
+                    print("\nProducto encontrado:")
+                    print(producto)
+                    self.menu_Salida()
+                    return
+
+            print("No se encontró ningún producto con ese código.")
+            self.menu_Salida()
+
+
+
+inventario = Inventario()
+listado = Listado(inventario)
+busqueda = Buscar(inventario)
+
 while True:
     print("- BIENVENIDO A SMARTSTOCK - ")
     print("----- M E N Ú ----- ")
     print("1. Registro de Producto")
     print("2. Listado de Productos ")
     print("3. Búsqueda de Producto ")
-    print("4. Actualizar Producto ")
+    print("4. Actualizar/Eliminar Producto ")
     print("5. Eliminar Producto ")
     print("6. Salir")
+
     while True:
         try:
             opcion = int(input("Seleccione una opción:  "))
-            if opcion not in range(1, 6):
-                print("Opción iválida. Intente nuevamente.  \n")
+            if opcion not in range(1, 7):
+                print("Opción inválida. Intente nuevamente.  \n")
             else:
                 break
         except ValueError:
@@ -96,15 +263,17 @@ while True:
 
     match opcion:
         case 1:
-            Inventario.agregar()
+            inventario.agregar()
         case 2:
-            pass
+            listado.ordenamiento()
         case 3:
-            pass
+            busqueda.buscar_codigo()
         case 4:
-            Inventario.modif(sampletext)
+          # Inventario.modif(sampletext)
+            pass
         case 5:
-            Inventario.eliminate(sampletext)
+          #  Inventario.eliminate(sampletext)
+            pass
         case 6:
             print("Adiós, vuelva pronto.")
             break
