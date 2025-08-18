@@ -55,7 +55,7 @@ class Inventario:
                 try:
                     precio = float(input("Ingrese precio: "))
                     if precio <= 0:
-                        print("Error: El precio debe ser un número positivo.\n")
+                        print("El precio debe ser un número positivo.\n")
                         continue
                     break
                 except ValueError:
@@ -84,8 +84,92 @@ class Inventario:
                 else:
                     print("Opción inválida. Responda 'si' o 'no'.\n")
 
+class Listado():
+    def __init__(self, inventario):
+        self.Productos = inventario.Productos
+
+    def quick_sort(self, lista, buscar):
+        if len(lista) <= 1:
+            return lista
+        pivote = lista[0]
+        menores = [x for x in lista[1:] if buscar(x) < buscar(pivote)]
+        iguales = [x for x in lista if buscar(x) == buscar(pivote)]
+        mayores = [x for x in lista[1:] if buscar(x) > buscar(pivote)]
+        return self.quick_sort(menores, buscar) + iguales + self.quick_sort(mayores, buscar)
+
+
+    def mostrar(self):
+        if not self.Productos:
+            print("Aún no hay productos en el inventario.\n")
+            while True:
+                opcion = input("¿Desea regresar al menú principal? (si/no): ").strip().lower()
+                if opcion == "si":
+                    return
+                elif opcion == "no":
+                    print("Adiós, vuelva pronto.")
+                    exit()
+                else:
+                    print("Opción inválida. Responda 'si' o 'no'.")
+
+        while True:
+            ver_original = input("¿Desea ver el listado original de productos? (si/no): ").strip().lower()
+            productos_lista = list(self.Productos.values())
+
+            if ver_original == "si":
+                print("\n--- LISTADO ORIGINAL ---")
+                for producto in productos_lista:
+                    print(producto)
+            elif ver_original != "no":
+                print("Opción inválida. Responda 'si' o 'no'.\n")
+                continue
+
+            ordenar = input("\n¿Desea ordenar los productos? (si/no): ").strip().lower()
+            if ordenar == "no":
+                print("Regresando al menú principal...\n")
+                return
+            elif ordenar != "si":
+                print("Opción inválida. Responda 'si' o 'no'.\n")
+                continue
+
+            print("\nOrdenar por:")
+            print("1) Nombre")
+            print("2) Precio")
+            print("3) Stock")
+            try:
+                opcion = int(input("Seleccione una opción: "))
+            except ValueError:
+                print(" Debe ingresar un número válido.\n")
+                continue
+
+            def por_nombre(prod):
+                return prod.nombre.lower()
+
+            def por_precio(prod):
+                return prod.precio
+
+            def por_stock(prod):
+                return prod.stock
+
+            if opcion == 1:
+                productos_lista = self.quick_sort(productos_lista, buscar=por_nombre)
+            elif opcion == 2:
+                productos_lista = self.quick_sort(productos_lista, buscar=por_precio)
+            elif opcion == 3:
+                productos_lista = self.quick_sort(productos_lista, buscar=por_stock)
+            else:
+                print("Opción inválida. Mostrando sin ordenar.\n")
+
+            print("\n--- LISTADO ORDENADO ---")
+            for producto in productos_lista:
+                print(producto)
+
+            continuar = input("\n¿Desea ordenar nuevamente? (si/no): ").strip().lower()
+            if continuar == "no":
+                print("Regresando al menú principal...\n")
+                return
 
 inventario = Inventario()
+listado = Listado(inventario)
 
 while True:
     print("- BIENVENIDO A SMARTSTOCK - ")
@@ -110,7 +194,7 @@ while True:
         case 1:
             inventario.agregar()
         case 2:
-            pass
+            listado.mostrar()
         case 3:
             pass
         case 4:
