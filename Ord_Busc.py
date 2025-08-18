@@ -200,10 +200,46 @@ class Listado():
 
 
 class Buscar():
+    def __init__(self, inventario):
+        self.Productos = inventario.Productos
+
+    def menu_Salida(self):
+        while True:
+            opcion = input("\n¿Desea regresar al menú principal o salir? (menu/salir): ").strip().lower()
+            if opcion == "menu":
+                return
+            elif opcion == "salir":
+                print("Adiós, vuelva pronto.")
+                exit()
+            else:
+                 print("Opción inválida. Responda 'menu' o 'salir'.")
+
+
+    def buscar_codigo(self):
+            if not self.Productos:
+                print("Aún no hay productos en el inventario")
+                self.menu.Salida()
+                return
+            try:
+                codigo_buscar = int(input("Ingrese el código del producto: "))
+            except ValueError:
+                print("Debe ingresar un número válido")
+                return
+            for producto in self.Productos.values():
+                if producto.codigo == codigo_buscar:
+                    print("\nProducto encontrado:")
+                    print(producto)
+                    self.menu_Salida()
+                    return
+
+            print("No se encontró ningún producto con ese código.")
+            self.menu_Salida()
+
 
 
 inventario = Inventario()
 listado = Listado(inventario)
+busqueda = Buscar(inventario)
 
 while True:
     print("- BIENVENIDO A SMARTSTOCK - ")
@@ -230,7 +266,7 @@ while True:
         case 2:
             listado.ordenamiento()
         case 3:
-            pass
+            busqueda.buscar_codigo()
         case 4:
             pass
         case 5:
