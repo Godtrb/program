@@ -144,15 +144,16 @@ class Listado():
     def mostrar(self):
         if not self.Productos:
             print("Aún no hay productos en el inventario.\n")
-            while True:
-                opcion = input("¿Desea regresar al menú principal? (si/no): ").strip().lower()
-                if opcion == "si":
-                    return
-                elif opcion == "no":
-                    print("Adiós, vuelva pronto.")
-                    exit()
-                else:
-                    print("Opción inválida. Responda 'si' o 'no'.")
+            self.menu_Salida()
+            return
+
+        print("---- LISTADO DE PRODUCTOS --")
+        for producto in self.Productos.values():
+            print(producto)
+     #   self.menu_Salida()
+
+        def ordenamiento(self):
+            if no
 
         while True:
             ver_original = input("¿Desea ver el listado original de productos? (si/no): ").strip().lower()
@@ -210,6 +211,8 @@ class Listado():
             if continuar == "no":
                 print("Regresando al menú principal...\n")
                 return
+class Buscar():
+
 
 inventario = Inventario()
 listado = Listado(inventario)
@@ -248,28 +251,3 @@ while True:
 
 
 
-"""
-class Ordenador:
-    def listado(self):
-        if not  self.Productos:
-            print("No hay productos registrados. \n")
-            return
-
-        productos_lista = list(self.Productos.values())
-
-        ordenar = input("Desea ordenar los productos? (si/no):  ").strip().lower()
-        if ordenar == "no":
-            for producto in productos_lista:
-                print(producto)
-            return
-        if ordenar == "si":
-            print("Desea ordenar por: ")
-            print("1. Nombre")
-            print("2. Precio")
-            print("3. Stock")
-
-            try:
-                opcion = int(input("Seleccione una opcion: "))
-            except ValueError:
-                print("Debe ingresar un número válido")
-"""
