@@ -248,12 +248,13 @@ while True:
     print("2. Listado de Productos ")
     print("3. Búsqueda de Producto ")
     print("4. Actualizar/Eliminar Producto ")
-    print("5. Salir")
+    print("5. Eliminar Producto ")
+    print("6. Salir")
 
     while True:
         try:
             opcion = int(input("Seleccione una opción:  "))
-            if opcion not in range(1, 6):
+            if opcion not in range(1, 7):
                 print("Opción inválida. Intente nuevamente.  \n")
             else:
                 break
@@ -270,6 +271,8 @@ while True:
         case 4:
             pass
         case 5:
+            pass
+        case 6:
             print("Adiós, vuelva pronto.")
             break
 
