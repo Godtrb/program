@@ -85,44 +85,47 @@ class Inventario:
                     print("Opción inválida. Responda 'si' o 'no'.\n")
 
     def modif(self, codigo):
-        try:
-                print("¿Qué desea modificar?")
-                print("1) Nombre")
-                print("2) Categoría")
-                print("3) Precio")
-                print("4) Stock")
-                print("5) Regresar")
-
-                menpick = int(input("Ingresar opción: "))
-
-                if menpick == 1:
-                    name = input("Ingrese el nuevo nombre: ")
-                    self.Productos[codigo].nombre = name
-                    print("Nombre actualizado correctamente.")
-
-                elif menpick == 2:
-                    categ = input("Ingrese la nueva categoría: ")
-                    self.Productos[codigo].categoria = categ
-                    print("Categoría actualizada correctamente.")
-
-                elif menpick == 3:
-                    precio = float(input("Ingrese el nuevo precio: "))
-                    self.Productos[codigo].precio = precio
-                    print("Precio actualizado correctamente.")
-
-                elif menpick == 4:
-                    stock = int(input("Ingrese el nuevo stock: "))
-                    self.Productos[codigo].stock = stock
-                    print("Stock actualizado correctamente.")
-
-                elif menpick == 5:
-                    print("Regresando al menú principal...")
-
-                else:
-                    print("Opción no válida, intente nuevamente.")
-
-        except ValueError:
-            print("Error: Ingrese un valor válido.")
+        if codigo !=-1:
+            try:
+                    print("¿Qué desea modificar?")
+                    print("1) Nombre")
+                    print("2) Categoría")
+                    print("3) Precio")
+                    print("4) Stock")
+                    print("5) Regresar")
+    
+                    menpick = int(input("Ingresar opción: "))
+    
+                    if menpick == 1:
+                        name = input("Ingrese el nuevo nombre: ")
+                        self.Productos[codigo].nombre = name
+                        print("Nombre actualizado correctamente.")
+    
+                    elif menpick == 2:
+                        categ = input("Ingrese la nueva categoría: ")
+                        self.Productos[codigo].categoria = categ
+                        print("Categoría actualizada correctamente.")
+    
+                    elif menpick == 3:
+                        precio = float(input("Ingrese el nuevo precio: "))
+                        self.Productos[codigo].precio = precio
+                        print("Precio actualizado correctamente.")
+    
+                    elif menpick == 4:
+                        stock = int(input("Ingrese el nuevo stock: "))
+                        self.Productos[codigo].stock = stock
+                        print("Stock actualizado correctamente.")
+    
+                    elif menpick == 5:
+                        print("Regresando al menú principal...")
+    
+                    else:
+                        print("Opción no válida, intente nuevamente.")
+    
+            except ValueError:
+                print("Error: Ingrese un valor válido.")
+        else:
+            print("Codigo no encontrado.")
     def eliminate(self, codigo):
         self.Productos[codigo].pop()
         print("Producto eliminado correctamente.")
