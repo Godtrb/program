@@ -7,7 +7,7 @@ class Producto:
         self.stock = stock
 
     def __str__(self):
-        return f"Código: {self.codigo} Producto: {self.nombre} Categoría: {self.categoria}  Precio: {self.precio}  Stock: {self.stock}"
+        return f"Código: {self.codigo} Producto: {self.nombre} Categoría: {self.categoria}  Precio: Q.{self.precio}  Stock: {self.stock}"
 
 
 class Inventario:
