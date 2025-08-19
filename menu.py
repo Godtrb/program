@@ -7,7 +7,7 @@ class Producto:
         self.stock = stock
 
     def __str__(self):
-        return f"Código: {self.codigo} Producto: {self.nombre} Categoría: {self.categoria}  Precio: Q.{self.precio}  Stock: {self.stock}"
+        return f"Código: {self.codigo} Producto: {self.nombre} Categoría: {self.categoria}  Precio: Q{self.precio}  Stock: {self.stock}"
 
 
 class Inventario:
@@ -129,7 +129,7 @@ class Inventario:
 
     def eliminate(self, codigo):
         if codigo != -1:
-            del Productos[codigo]
+            del self.Productos[codigo]
             print("Producto eliminado correctamente.")
         else:
             print("Codigo no encontrado.")
