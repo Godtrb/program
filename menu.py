@@ -85,53 +85,55 @@ class Inventario:
                     print("Opción inválida. Responda 'si' o 'no'.\n")
 
     def modif(self, codigo):
-        if codigo !=-1:
+        if codigo != -1:
             try:
-                    print("¿Qué desea modificar?")
-                    print("1) Nombre")
-                    print("2) Categoría")
-                    print("3) Precio")
-                    print("4) Stock")
-                    print("5) Regresar")
-    
-                    menpick = int(input("Ingresar opción: "))
-    
-                    if menpick == 1:
-                        name = input("Ingrese el nuevo nombre: ")
-                        self.Productos[codigo].nombre = name
-                        print("Nombre actualizado correctamente.")
-    
-                    elif menpick == 2:
-                        categ = input("Ingrese la nueva categoría: ")
-                        self.Productos[codigo].categoria = categ
-                        print("Categoría actualizada correctamente.")
-    
-                    elif menpick == 3:
-                        precio = float(input("Ingrese el nuevo precio: "))
-                        self.Productos[codigo].precio = precio
-                        print("Precio actualizado correctamente.")
-    
-                    elif menpick == 4:
-                        stock = int(input("Ingrese el nuevo stock: "))
-                        self.Productos[codigo].stock = stock
-                        print("Stock actualizado correctamente.")
-    
-                    elif menpick == 5:
-                        print("Regresando al menú principal...")
-    
-                    else:
-                        print("Opción no válida, intente nuevamente.")
-    
+                print("¿Qué desea modificar?")
+                print("1) Nombre")
+                print("2) Categoría")
+                print("3) Precio")
+                print("4) Stock")
+                print("5) Regresar")
+
+                menpick = int(input("Ingresar opción: "))
+
+                if menpick == 1:
+                    name = input("Ingrese el nuevo nombre: ")
+                    self.Productos[codigo].nombre = name
+                    print("Nombre actualizado correctamente.")
+
+                elif menpick == 2:
+                    categ = input("Ingrese la nueva categoría: ")
+                    self.Productos[codigo].categoria = categ
+                    print("Categoría actualizada correctamente.")
+
+                elif menpick == 3:
+                    precio = float(input("Ingrese el nuevo precio: "))
+                    self.Productos[codigo].precio = precio
+                    print("Precio actualizado correctamente.")
+
+                elif menpick == 4:
+                    stock = int(input("Ingrese el nuevo stock: "))
+                    self.Productos[codigo].stock = stock
+                    print("Stock actualizado correctamente.")
+
+                elif menpick == 5:
+                    print("Regresando al menú principal...")
+
+                else:
+                    print("Opción no válida, intente nuevamente.")
+
             except ValueError:
                 print("Error: Ingrese un valor válido.")
         else:
             print("Codigo no encontrado.")
+
     def eliminate(self, codigo):
-        if codigo !=-1:
+        if codigo != -1:
             self.Productos[codigo].pop()
             print("Producto eliminado correctamente.")
         else:
             print("Codigo no encontrado.")
+
 
 class Listado():
     def __init__(self, inventario):
@@ -146,7 +148,6 @@ class Listado():
         mayores = [x for x in lista[1:] if buscar(x) > buscar(pivote)]
         return self.quick_sort(menores, buscar) + iguales + self.quick_sort(mayores, buscar)
 
-
     def menu_Salida(self):
         while True:
             opcion = input("\n¿Desea regresar al menú principal o salir? (menu/salir): ").strip().lower()
@@ -156,53 +157,53 @@ class Listado():
                 print("Adiós, vuelva pronto.")
                 exit()
             else:
-                 print("Opción inválida. Responda 'menu' o 'salir'.")
+                print("Opción inválida. Responda 'menu' o 'salir'.")
 
     def ordenamiento(self):
-            if not  self.Productos:
-                print("Aún no hay productos en el inventario.")
-                self.menu_Salida()
+        if not self.Productos:
+            print("Aún no hay productos en el inventario.")
+            self.menu_Salida()
+            return
+        productos_lista = list(self.Productos.values())
+        print("\n--- LISTADO DE PRODUCTOS  ---")
+        for producto in productos_lista:
+            print(producto)
+        while True:
+            print("\nOrdenar por:")
+            print("1) Nombre")
+            print("2) Precio")
+            print("3) Stock")
+            try:
+                opcion = int(input("Seleccione una opción: "))
+            except ValueError:
+                print(" Debe ingresar un número válido.\n")
+                continue
+
+            def por_nombre(prod):
+                return prod.nombre.lower()
+
+            def por_precio(prod):
+                return prod.precio
+
+            def por_stock(prod):
+                return prod.stock
+
+            if opcion == 1:
+                productos_lista = self.quick_sort(productos_lista, buscar=por_nombre)
+            elif opcion == 2:
+                productos_lista = self.quick_sort(productos_lista, buscar=por_precio)
+            elif opcion == 3:
+                productos_lista = self.quick_sort(productos_lista, buscar=por_stock)
+            elif opcion == 4:
                 return
-            productos_lista = list(self.Productos.values())
-            print("\n--- LISTADO DE PRODUCTOS  ---")
+            else:
+                print("Opción inválida... \n")
+
+            print("--- LISTADO DE PRODUCTOS  ---")
             for producto in productos_lista:
                 print(producto)
-            while True:
-                print("\nOrdenar por:")
-                print("1) Nombre")
-                print("2) Precio")
-                print("3) Stock")
-                try:
-                    opcion = int(input("Seleccione una opción: "))
-                except ValueError:
-                    print(" Debe ingresar un número válido.\n")
-                    continue
-
-                def por_nombre(prod):
-                    return prod.nombre.lower()
-
-                def por_precio(prod):
-                    return prod.precio
-
-                def por_stock(prod):
-                    return prod.stock
-
-                if opcion == 1:
-                    productos_lista = self.quick_sort(productos_lista, buscar=por_nombre)
-                elif opcion == 2:
-                    productos_lista = self.quick_sort(productos_lista, buscar=por_precio)
-                elif opcion == 3:
-                    productos_lista = self.quick_sort(productos_lista, buscar=por_stock)
-                elif opcion == 4:
-                    return
-                else:
-                    print("Opción inválida... \n")
-
-                print("--- LISTADO DE PRODUCTOS  ---")
-                for producto in productos_lista:
-                    print(producto)
-                self.menu_Salida()
-                return
+            self.menu_Salida()
+            return
 
 
 class Buscar():
@@ -218,29 +219,42 @@ class Buscar():
                 print("Adiós, vuelva pronto.")
                 exit()
             else:
-                 print("Opción inválida. Responda 'menu' o 'salir'.")
+                print("Opción inválida. Responda 'menu' o 'salir'.")
+
+    def buscar_codigo_2(self):
+        if not self.Productos:
+            print("Aún no hay productos en el inventario")
+            self.menu_Salida()
+            return -1
+        try:
+            codigo_buscar = int(input("Ingrese el código del producto: "))
+        except ValueError:
+            print("Debe ingresar un número válido")
+            return -1
+        for producto in self.Productos.values():
+            if producto.codigo == codigo_buscar:
+                return codigo_buscar
 
 
     def buscar_codigo(self):
-            if not self.Productos:
-                print("Aún no hay productos en el inventario")
+        if not self.Productos:
+            print("Aún no hay productos en el inventario")
+            self.menu_Salida()
+            return
+        try:
+            codigo_buscar = int(input("Ingrese el código del producto: "))
+        except ValueError:
+            print("Debe ingresar un número válido")
+            return
+        for producto in self.Productos.values():
+            if producto.codigo == codigo_buscar:
+                print("\nProducto encontrado:")
+                print(producto)
                 self.menu_Salida()
                 return
-            try:
-                codigo_buscar = int(input("Ingrese el código del producto: "))
-            except ValueError:
-                print("Debe ingresar un número válido")
-                return
-            for producto in self.Productos.values():
-                if producto.codigo == codigo_buscar:
-                    print("\nProducto encontrado:")
-                    print(producto)
-                    self.menu_Salida()
-                    return
 
-            print("No se encontró ningún producto con ese código.")
-            self.menu_Salida()
-
+        print("No se encontró ningún producto con ese código.")
+        self.menu_Salida()
 
 
 inventario = Inventario()
@@ -253,7 +267,7 @@ while True:
     print("1. Registro de Producto")
     print("2. Listado de Productos ")
     print("3. Búsqueda de Producto ")
-    print("4. Actualizar Producto ")
+    print("4. Actualizar/Eliminar Producto ")
     print("5. Eliminar Producto ")
     print("6. Salir")
 
@@ -275,12 +289,12 @@ while True:
         case 3:
             busqueda.buscar_codigo()
         case 4:
-            codtochange=busqueda.buscar_codigo()
-            Inventario.modif(codtochange)
+            codtochange = busqueda.buscar_codigo_2()
+            Inventario.modif(inventario,codtochange)
             pass
         case 5:
-            codtochange = busqueda.buscar_codigo()
-            Inventario.eliminate(codtochange)
+            codtochange = busqueda.buscar_codigo_2()
+            Inventario.eliminate (inventario,codtochange)
             pass
         case 6:
             print("Adiós, vuelva pronto.")
