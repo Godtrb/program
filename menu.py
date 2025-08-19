@@ -128,7 +128,7 @@ class Inventario:
             print("Codigo no encontrado.")
 
     def eliminate(self, codigo):
-        if codigo != -1:
+        if codigo != -1 and codigo in self.Productos:
             del self.Productos[codigo]
             print("Producto eliminado correctamente.")
         else:
