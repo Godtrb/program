@@ -129,7 +129,7 @@ class Inventario:
 
     def eliminate(self, codigo):
         if codigo != -1:
-            self.Productos[codigo].pop()
+            del Productos[codigo]
             print("Producto eliminado correctamente.")
         else:
             print("Codigo no encontrado.")
