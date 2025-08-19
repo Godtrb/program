@@ -127,8 +127,11 @@ class Inventario:
         else:
             print("Codigo no encontrado.")
     def eliminate(self, codigo):
-        self.Productos[codigo].pop()
-        print("Producto eliminado correctamente.")
+        if codigo !=-1:
+            self.Productos[codigo].pop()
+            print("Producto eliminado correctamente.")
+        else:
+            print("Codigo no encontrado.")
 
 class Listado():
     def __init__(self, inventario):
