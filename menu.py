@@ -53,7 +53,7 @@ class Inventario:
 
             while True:
                 try:
-                    precio = float(input("Ingrese precio: "))
+                    precio = float(input("Ingrese precio: Q"))
                     if precio <= 0:
                         print("El precio debe ser un número positivo.\n")
                         continue
@@ -107,7 +107,7 @@ class Inventario:
                     print("Categoría actualizada correctamente.")
 
                 elif menpick == 3:
-                    precio = float(input("Ingrese el nuevo precio: "))
+                    precio = float(input("Ingrese el nuevo precio: Q"))
                     self.Productos[codigo].precio = precio
                     print("Precio actualizado correctamente.")
 
