@@ -267,7 +267,7 @@ while True:
     print("1. Registro de Producto")
     print("2. Listado de Productos ")
     print("3. Búsqueda de Producto ")
-    print("4. Actualizar/Eliminar Producto ")
+    print("4. Actualizar Producto ")
     print("5. Eliminar Producto ")
     print("6. Salir")
 
