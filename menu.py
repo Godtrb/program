@@ -216,10 +216,11 @@ class Buscar():
 
 
     def buscar_codigo(self):
+            i = -1
             if not self.Productos:
                 print("Aún no hay productos en el inventario")
                 self.menu_Salida()
-                return
+                return i
             try:
                 codigo_buscar = int(input("Ingrese el código del producto: "))
             except ValueError:
